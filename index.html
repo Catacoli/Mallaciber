@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malla Curricular - Lic. en Ciberseguridad</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      margin: 0;
+      padding: 1rem;
+    }
+    h1 {
+      text-align: center;
+      color: #c71585;
+    }
+    .grid {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+    }
+    .column {
+      min-width: 250px;
+      background: #ffe4ec;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .column h2 {
+      text-align: center;
+      color: #db5c9a;
+    }
+    .subject {
+      background: #fff;
+      border: 2px solid #db5c9a;
+      border-radius: 8px;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: 0.3s;
+      position: relative;
+    }
+    .subject.locked {
+      background: #f8d4e4;
+      border-style: dashed;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+    .subject.completed {
+      background: #ffc0cb;
+      text-decoration: line-through;
+    }
+    .subject:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff0f5;
+      color: #333;
+      border: 1px solid #c71585;
+      padding: 0.4rem;
+      border-radius: 5px;
+      white-space: nowrap;
+      z-index: 1;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Malla Curricular - Licenciatura en Ciberseguridad</h1>
+  <div class="grid" id="curriculum"></div>
+
+  <script>
+    const subjects = [
+      {
+        year: "1° Año - 1° Cuatrimestre",
+        items: [
+          { id: "00302", name: "Introducción al Desarrollo de Sistemas" },
+          { id: "00303", name: "Fundamentos del Cibercrimen" },
+          { id: "00304", name: "Conceptos de Desarrollo de Software" }
+        ]
+      },
+      {
+        year: "1° Año - 2° Cuatrimestre",
+        items: [
+          { id: "00307", name: "Arquitectura de Tecnologías Informáticas", req: ["00302"] },
+          { id: "00308", name: "Fundamentos de Matemática", req: [] },
+          { id: "00310", name: "Fundamentos de Ciberseguridad", req: ["00302", "00303", "00304"] }
+        ]
+      },
+      {
+        year: "2° Año - 1° Cuatrimestre",
+        items: [
+          { id: "00311", name: "Programación Orientada a Objetos", req: ["00304"] },
+          { id: "00312", name: "Cálculo Aplicado", req: ["00308"] },
+          { id: "00313", name: "Gestión Integral de la Ciberseguridad", req: ["00310"] }
+        ]
+      },
+      {
+        year: "2° Año - 2° Cuatrimestre",
+        items: [
+          { id: "00314", name: "Sistemas de Análisis y Métodos de Diseño", req: ["00307"] },
+          { id: "00315", name: "Base de Datos", req: ["00310"] },
+          { id: "00316", name: "Ciberdefensa", req: ["00312", "00313"] }
+        ]
+      },
+      {
+        year: "3° Año - 1° Cuatrimestre",
+        items: [
+          { id: "00317", name: "Programación de Sistemas", req: ["00314"] },
+          { id: "00318", name: "Investigación Criminal de Delitos Informáticos", req: ["00316"] },
+          { id: "00319", name: "Ingeniería de Redes", req: ["00315"] }
+        ]
+      },
+      {
+        year: "3° Año - 2° Cuatrimestre",
+        items: [
+          { id: "00320", name: "Criptografía", req: ["00317"] },
+          { id: "00321", name: "Administración de Redes", req: ["00315"] },
+          { id: "00322", name: "Cibercrimen y Análisis Forense", req: ["00316"] }
+        ]
+      }
+    ];
+
+    const approved = JSON.parse(localStorage.getItem('approvedSubjects') || '[]');
+
+    function render() {
+      const container = document.getElementById('curriculum');
+      container.innerHTML = '';
+      for (const block of subjects) {
+        const col = document.createElement('div');
+        col.className = 'column';
+        col.innerHTML = `<h2>${block.year}</h2>`;
+        for (const subject of block.items) {
+          const el = document.createElement('div');
+          el.className = 'subject';
+          el.textContent = subject.name;
+          el.dataset.id = subject.id;
+
+          const unmet = subject.req?.filter(id => !approved.includes(id)) || [];
+
+          if (approved.includes(subject.id)) {
+            el.classList.add('completed');
+          } else if (unmet.length) {
+            el.classList.add('locked');
+            el.dataset.tooltip = `Requiere: ${unmet.join(', ')}`;
+          }
+
+          el.onclick = () => {
+            if (unmet.length) return;
+            const idx = approved.indexOf(subject.id);
+            if (idx >= 0) {
+              approved.splice(idx, 1);
+            } else {
+              approved.push(subject.id);
+            }
+            localStorage.setItem('approvedSubjects', JSON.stringify(approved));
+            render();
+          };
+          col.appendChild(el);
+        }
+        container.appendChild(col);
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>

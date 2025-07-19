@@ -91,95 +91,93 @@
 
   <script>
     const subjects = [
-      const subjects = [
-  {
-    year: "1° Año",
-    semesters: [
       {
-        name: "1° Cuatrimestre",
-        items: [
-          { id: "00302", name: "Introducción al Desarrollo de Sistemas" },
-          { id: "00303", name: "Fundamentos del Cibercrimen" },
-          { id: "00304", name: "Conceptos de Desarrollo de Software" }
+        year: "1° Año",
+        semesters: [
+          {
+            name: "1° Cuatrimestre",
+            items: [
+              { id: "00302", name: "Introducción al Desarrollo de Sistemas" },
+              { id: "00303", name: "Fundamentos del Cibercrimen" },
+              { id: "00304", name: "Conceptos de Desarrollo de Software" }
+            ]
+          },
+          {
+            name: "2° Cuatrimestre",
+            items: [
+              { id: "00307", name: "Arquitectura de Tecnologías Informáticas", reqRegularizadas: ["00302"] },
+              { id: "00308", name: "Fundamentos de Matemática" },
+              { id: "00310", name: "Fundamentos de Ciberseguridad", reqRegularizadas: ["00302", "00303", "00304"] }
+            ]
+          }
         ]
       },
       {
-        name: "2° Cuatrimestre",
-        items: [
-          { id: "00307", name: "Arquitectura de Tecnologías Informáticas", reqRegularizadas: ["00302"] },
-          { id: "00308", name: "Fundamentos de Matemática" },
-          { id: "00310", name: "Fundamentos de Ciberseguridad", reqRegularizadas: ["00302", "00303", "00304"] }
-        ]
-      }
-    ]
-  },
-  {
-    year: "2° Año",
-    semesters: [
-      {
-        name: "1° Cuatrimestre",
-        items: [
-          { id: "00311", name: "Programación Orientada a Objetos", reqAprobadas: ["00304"] },
-          { id: "00312", name: "Cálculo Aplicado", reqAprobadas: ["00308"] },
-          { id: "00313", name: "Gestión Integral de la Ciberseguridad", reqAprobadas: ["00310"] }
-        ]
-      },
-      {
-        name: "2° Cuatrimestre",
-        items: [
-          { id: "00314", name: "Sistemas de Análisis y Métodos de Diseño", reqAprobadas: ["00307"] },
-          { id: "00315", name: "Base de Datos", reqAprobadas: ["00310"] },
-          { id: "00316", name: "Ciberdefensa", reqAprobadas: ["00312", "00313"] }
-        ]
-      }
-    ]
-  },
-  {
-    year: "3° Año",
-    semesters: [
-      {
-        name: "1° Cuatrimestre",
-        items: [
-          { id: "00317", name: "Programación de Sistemas", reqAprobadas: ["00314"] },
-          { id: "00318", name: "Investigación Criminal de Delitos Informáticos", reqAprobadas: ["00316"] },
-          { id: "00319", name: "Ingeniería de Redes", reqAprobadas: ["00315"] }
+        year: "2° Año",
+        semesters: [
+          {
+            name: "1° Cuatrimestre",
+            items: [
+              { id: "00311", name: "Programación Orientada a Objetos", reqAprobadas: ["00304"] },
+              { id: "00312", name: "Cálculo Aplicado", reqAprobadas: ["00308"] },
+              { id: "00313", name: "Gestión Integral de la Ciberseguridad", reqAprobadas: ["00310"] }
+            ]
+          },
+          {
+            name: "2° Cuatrimestre",
+            items: [
+              { id: "00314", name: "Sistemas de Análisis y Métodos de Diseño", reqAprobadas: ["00307"] },
+              { id: "00315", name: "Base de Datos", reqAprobadas: ["00310"] },
+              { id: "00316", name: "Ciberdefensa", reqAprobadas: ["00312", "00313"] }
+            ]
+          }
         ]
       },
       {
-        name: "2° Cuatrimestre",
-        items: [
-          { id: "00320", name: "Criptografía", reqAprobadas: ["00317"] },
-          { id: "00321", name: "Administración de Redes", reqAprobadas: ["00315"] },
-          { id: "00322", name: "Cibercrimen y Análisis Forense", reqAprobadas: ["00316"] }
-        ]
-      }
-    ]
-  },
-  {
-    year: "4° Año",
-    semesters: [
-      {
-        name: "1° Cuatrimestre",
-        items: [
-          { id: "00511", name: "Deontología Profesional" },
-          { id: "00512", name: "Fraude y Protección de Datos Personales" },
-          { id: "00513", name: "Ciberinteligencia" }
+        year: "3° Año",
+        semesters: [
+          {
+            name: "1° Cuatrimestre",
+            items: [
+              { id: "00317", name: "Programación de Sistemas", reqAprobadas: ["00314"] },
+              { id: "00318", name: "Investigación Criminal de Delitos Informáticos", reqAprobadas: ["00316"] },
+              { id: "00319", name: "Ingeniería de Redes", reqAprobadas: ["00315"] }
+            ]
+          },
+          {
+            name: "2° Cuatrimestre",
+            items: [
+              { id: "00320", name: "Criptografía", reqAprobadas: ["00317"] },
+              { id: "00321", name: "Administración de Redes", reqAprobadas: ["00315"] },
+              { id: "00322", name: "Cibercrimen y Análisis Forense", reqAprobadas: ["00316"] }
+            ]
+          }
         ]
       },
       {
-        name: "2° Cuatrimestre",
-        items: [
-          { id: "00514", name: "Comunicación Estratégica" },
-          { id: "00515", name: "Práctica Profesional Supervisada" },
-          { id: "00516", name: "Hacking Ético" },
-          { id: "00517", name: "Liderazgo de Equipos y RRHH" },
-          { id: "00518", name: "Diplomacia y RRII en Ciberseguridad" },
-          { id: "00519", name: "Trabajo Final Integrador", reqAprobadas: ["00320", "00513"] }
+        year: "4° Año",
+        semesters: [
+          {
+            name: "1° Cuatrimestre",
+            items: [
+              { id: "00511", name: "Deontología Profesional" },
+              { id: "00512", name: "Fraude y Protección de Datos Personales" },
+              { id: "00513", name: "Ciberinteligencia" }
+            ]
+          },
+          {
+            name: "2° Cuatrimestre",
+            items: [
+              { id: "00514", name: "Comunicación Estratégica" },
+              { id: "00515", name: "Práctica Profesional Supervisada" },
+              { id: "00516", name: "Hacking Ético" },
+              { id: "00517", name: "Liderazgo de Equipos y RRHH" },
+              { id: "00518", name: "Diplomacia y RRII en Ciberseguridad" },
+              { id: "00519", name: "Trabajo Final Integrador", reqAprobadas: ["00320", "00513"] }
+            ]
+          }
         ]
       }
-    ]
-  }
-];
     ];
 
     const progress = JSON.parse(localStorage.getItem('subjectStatus') || '{}');
